@@ -26,9 +26,10 @@ public class Diccionario {
             System.out.println("Menu");
             System.out.println("===============");
             System.out.println("1) Agregar palabra");
-            System.out.println("2) Mostrar Diccionario");
-            System.out.println("3) Eliminar Palabra");
-            System.out.println("4) Salir");
+            System.out.println("2) Buscar palabra ");
+            System.out.println("3) Mostrar Diccionario");
+            System.out.println("4) Eliminar Palabra");
+            System.out.println("5) Salir");
             opcion = leer.nextInt();
 
             switch (opcion) {
@@ -42,21 +43,21 @@ public class Diccionario {
                     System.out.print("Ingrese Clasificación: ");
                     String c = leer.next();
 
-                    t.insert(new Palabra(n, s, c));
-                    break;
-                case 2:
-                    t.displayTree();
+//                    t.insert(new Palabra(n, s, c));
                     break;
                 case 3:
+                    t.displayTree();
+                    break;
+                case 4:
                     System.out.print("Palabra a eliminar: ");
                     String e = leer.next();
-                    t.delete(e);
+//                    t.delete(e);
                     break;
 
-                case 4:
+                case 5:
                     System.out.println("Saliendo...");
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
     }
 
 }
