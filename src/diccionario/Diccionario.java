@@ -38,7 +38,7 @@ public class Diccionario {
                     String n = leer.next();
 
                     System.out.print("Ingrese Significado: ");
-                    String s = leer.next();
+                    String s = leer.nextLine();
 
                     System.out.print("Ingrese Clasificación: ");
                     String c = leer.next();
