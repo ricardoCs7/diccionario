@@ -5,6 +5,8 @@
  */
 package diccionario;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -22,42 +24,60 @@ public class Diccionario {
         Scanner leer = new Scanner(System.in);
 
         int opcion;
-        do {
-            System.out.println("Menu");
-            System.out.println("===============");
-            System.out.println("1) Agregar palabra");
-            System.out.println("2) Buscar palabra ");
-            System.out.println("3) Mostrar Diccionario");
-            System.out.println("4) Eliminar Palabra");
-            System.out.println("5) Salir");
-            opcion = leer.nextInt();
 
-            switch (opcion) {
-                case 1:
-                    System.out.print("Ingrese palabra: ");
-                    String n = leer.next();
+        try {
 
-                    System.out.print("Ingrese Significado: ");
-                    String s = leer.nextLine();
+            do {
+                System.out.println("===============");
+                System.out.println("   Menu");
+                System.out.println("===============");
+                System.out.println("1) Agregar palabra");
+                System.out.println("2) Buscar palabra ");
+                System.out.println("3) Mostrar Diccionario");
+                System.out.println("4) Eliminar Palabra");
+                System.out.println("5) Salir");
+                opcion = leer.nextInt();
 
-                    System.out.print("Ingrese Clasificación: ");
-                    String c = leer.next();
+                switch (opcion) {
+                    case 1:
+                        System.out.print("Ingrese palabra: ");
+                        String n = leer.next();
 
-//                    t.insert(new Palabra(n, s, c));
-                    break;
-                case 3:
-                    t.displayTree();
-                    break;
-                case 4:
-                    System.out.print("Palabra a eliminar: ");
-                    String e = leer.next();
+                        System.out.print("Ingrese Significado: ");
+                        String s = leer.next();
+                        System.out.print("Ingrese Clasificación: ");
+                        String c = leer.next();
+
+                        t.insert(n, c, s);
+                        break;
+                    case 2:
+                        System.out.print("Ingrese búsqueda:");
+                        String b = leer.next();
+                        t.find(b);
+                        break;
+                        
+                    case 3:
+                        t.Ordenar();
+                        break;
+                    case 4:
+                        System.out.print("Palabra a eliminar: ");
+                        String e = leer.next();
 //                    t.delete(e);
-                    break;
+                        break;
+                    case 5:
+                        System.out.println("Saliendo...");
+                        break;
+                    default:
+                        System.out.println("Error, eliga un opción válida");
+                        System.out.println("");
+                        break;
+                }
+            } while (opcion != 5);
 
-                case 5:
-                    System.out.println("Saliendo...");
-            }
-        } while (opcion != 5);
+        } catch (InputMismatchException e) {
+            System.out.println("Solo números");
+             
+        }
+
     }
-
 }

@@ -19,7 +19,7 @@ class Node {
     {
         System.out.print('{');
         System.out.print(pal);
-        System.out.print(", ");
+        System.out.print(":, ");
         System.out.print(clas);
         System.out.print(",");
         System.out.print(sign);
@@ -78,7 +78,7 @@ class Tree {
             while (true) // (exits internally)
             {
                 parent = current;
-                if (id < current.iData) // go left?
+                if (pal.compareTo(current.pal)<0) // go left?
                 {
                     current = current.leftChild;
                     if (current == null) // if end of the line,
@@ -101,16 +101,16 @@ class Tree {
     }  // end insert()
 // -------------------------------------------------------------
 
-    public boolean delete(int key) // delete node with given key
+    public boolean delete(String key) // delete node with given key
     {                           // (assumes non-empty list)
         Node current = root;
         Node parent = root;
         boolean isLeftChild = true;
 
-        while (current.iData != key) // search for node
+        while (!current.pal.equalsIgnoreCase(key)) // search for node
         {
             parent = current;
-            if (key < current.iData) // go left?
+            if (key.compareToIgnoreCase(current.pal)<0) // go left?
             {
                 isLeftChild = true;
                 current = current.leftChild;
@@ -200,28 +200,18 @@ class Tree {
     }
 // -------------------------------------------------------------
 
-    public void traverse(int traverseType) {
-        switch (traverseType) {
-            case 1:
-                System.out.print("\nPreorder traversal: ");
-                preOrder(root);
-                break;
-            case 2:
-                System.out.print("\nInorder traversal:  ");
+    public void Ordenar() {
+                
+                System.out.println("inOrder:");
+                System.out.println("------------");
                 inOrder(root);
-                break;
-            case 3:
-                System.out.print("\nPostorder traversal: ");
-                postOrder(root);
-                break;
-        }
-        System.out.println();
+               
     }
 // -------------------------------------------------------------
 
     private void preOrder(Node localRoot) {
         if (localRoot != null) {
-            System.out.print(localRoot.iData + " ");
+            System.out.print(localRoot.pal + " ");
             preOrder(localRoot.leftChild);
             preOrder(localRoot.rightChild);
         }
@@ -231,7 +221,7 @@ class Tree {
     private void inOrder(Node localRoot) {
         if (localRoot != null) {
             inOrder(localRoot.leftChild);
-            System.out.print(localRoot.iData + " ");
+            System.out.println(localRoot.pal + " ");
             inOrder(localRoot.rightChild);
         }
     }
@@ -241,7 +231,7 @@ class Tree {
         if (localRoot != null) {
             postOrder(localRoot.leftChild);
             postOrder(localRoot.rightChild);
-            System.out.print(localRoot.iData + " ");
+            System.out.print(localRoot.pal + " ");
         }
     }
 // -------------------------------------------------------------
@@ -264,7 +254,7 @@ class Tree {
             while (globalStack.isEmpty() == false) {
                 Node temp = (Node) globalStack.pop();
                 if (temp != null) {
-                    System.out.print(temp.iData);
+                   temp.displayNode();
                     localStack.push(temp.leftChild);
                     localStack.push(temp.rightChild);
 
