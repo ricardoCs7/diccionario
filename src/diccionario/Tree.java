@@ -40,25 +40,40 @@ class Tree {
 // -------------------------------------------------------------
 
     //// REVISAR SI ESTA BIEN
-    
     public Node find(String key) // find node with given key
     {                           // (assumes non-empty tree)
         Node current = root;               // start at root
-        while (current.pal != key) // while no match,
-        {
-            if (key.compareTo(current.pal) < 0) // go left?
+
+        try {
+            while (!current.pal.equalsIgnoreCase(key)) // while no match,
             {
-                current = current.leftChild;
-            } else // or go right?
-            {
-                current = current.rightChild;
+
+                if (key.compareTo(current.pal) < 0) // go left?
+                {
+
+                    current.equals(current.leftChild);
+                } else {
+
+                    current.equals(current.rightChild);
+                }
+                if (current == null) // if no child,
+                {
+                    return null;
+                }
             }
-            if (current == null) // if no child,
-            {
-                return null;                 // didn't find it
-            }
+
+            System.out.println("----------------------------------");
+            System.out.println("    Se ha encontrado:");
+            System.out.println("PALABRA: " + current.pal);
+            System.out.println("CLASIFICACION: " + current.clas);
+            System.out.println("SIGNIFICADO: " + current.sign);
+            System.out.println("---------------------------------" + "\n");
+
+        } catch (java.lang.NullPointerException e) {
+            System.out.println("No se ha encontrado la palabra '" + key + "'");
         }
-        return current;                    // found it
+        // found it
+        return current;
     }  // end find()
 // -------------------------------------------------------------
 
@@ -78,7 +93,11 @@ class Tree {
             while (true) // (exits internally)
             {
                 parent = current;
-                if (pal.compareTo(current.pal)<0) // go left?
+                if (pal.equalsIgnoreCase(parent.pal)) {
+                    System.out.println("'"+ pal+"' "+ "ya existe, imposible guardar");
+                    return;
+                }
+                if (pal.compareTo(current.pal) < 0) // go left?
                 {
                     current = current.leftChild;
                     if (current == null) // if end of the line,
@@ -95,7 +114,9 @@ class Tree {
                         parent.rightChild = newNode;
                         return;
                     }
-                }  // end else go right
+                }
+
+                // end else go right
             }  // end while
         }  // end else not root
     }  // end insert()
@@ -107,74 +128,83 @@ class Tree {
         Node parent = root;
         boolean isLeftChild = true;
 
-        while (!current.pal.equalsIgnoreCase(key)) // search for node
-        {
-            parent = current;
-            if (key.compareToIgnoreCase(current.pal)<0) // go left?
-            {
-                isLeftChild = true;
-                current = current.leftChild;
-            } else // or go right?
-            {
-                isLeftChild = false;
-                current = current.rightChild;
-            }
-            if (current == null) // end of the line,
-            {
-                return false;                // didn't find it
-            }
-        }  // end while
-        // found node to delete
+        try {
 
-        // if no children, simply delete it
-        if (current.leftChild == null
-                && current.rightChild == null) {
-            if (current == root) // if root,
+            while (!current.pal.equalsIgnoreCase(key)) // search for node
             {
-                root = null;                 // tree is empty
-            } else if (isLeftChild) {
-                parent.leftChild = null;     // disconnect
-            } else // from parent
+                parent = current;
+                if (key.compareToIgnoreCase(current.pal) < 0) // go left?
+                {
+                    isLeftChild = true;
+                    current.equals(current.leftChild);
+                } else // or go right?
+                {
+                    isLeftChild = false;
+                    current.equals(current.rightChild);
+                }
+                if (current == null) // end of the line,
+                {
+                    return false;                // didn't find it
+                }
+            }  // end while
+            // found node to delete
+
+            // if no children, simply delete it
+            if (current.leftChild == null
+                    && current.rightChild == null) {
+                if (current == root) // if root,
+                {
+                    root = null;                 // tree is empty
+                } else if (isLeftChild) {
+                    parent.leftChild = null;     // disconnect
+                } else // from parent
+                {
+                    parent.rightChild = null;
+                }
+            } // if no right child, replace with left subtree
+            else if (current.rightChild == null) {
+                if (current == root) {
+                    root = current.leftChild;
+                } else if (isLeftChild) {
+                    parent.leftChild = current.leftChild;
+                } else {
+                    parent.rightChild = current.leftChild;
+                }
+            } // if no left child, replace with right subtree
+            else if (current.leftChild == null) {
+                if (current == root) {
+                    root = current.rightChild;
+                } else if (isLeftChild) {
+                    parent.leftChild = current.rightChild;
+                } else {
+                    parent.rightChild = current.rightChild;
+                }
+            } else // two children, so replace with inorder successor
             {
-                parent.rightChild = null;
-            }
-        } // if no right child, replace with left subtree
-        else if (current.rightChild == null) {
-            if (current == root) {
-                root = current.leftChild;
-            } else if (isLeftChild) {
-                parent.leftChild = current.leftChild;
-            } else {
-                parent.rightChild = current.leftChild;
-            }
-        } // if no left child, replace with right subtree
-        else if (current.leftChild == null) {
-            if (current == root) {
-                root = current.rightChild;
-            } else if (isLeftChild) {
-                parent.leftChild = current.rightChild;
-            } else {
-                parent.rightChild = current.rightChild;
-            }
-        } else // two children, so replace with inorder successor
-        {
-            // get successor of node to delete (current)
-            Node successor = getSuccessor(current);
+                // get successor of node to delete (current)
+                Node successor = getSuccessor(current);
 
-            // connect parent of current to successor instead
-            if (current == root) {
-                root = successor;
-            } else if (isLeftChild) {
-                parent.leftChild = successor;
-            } else {
-                parent.rightChild = successor;
-            }
+                // connect parent of current to successor instead
+                if (current == root) {
+                    root = successor;
+                } else if (isLeftChild) {
+                    parent.leftChild = successor;
+                } else {
+                    parent.rightChild = successor;
+                }
 
-            // connect successor to current's left child
-            successor.leftChild = current.leftChild;
-        }  // end else two children
-        // (successor cannot have a left child)
-        return true;                                // success
+                // connect successor to current's left child
+                successor.leftChild = current.leftChild;
+            }  // end else two children
+            // (successor cannot have a left child)
+            System.out.println("Se ha eliminado la palabra " + key);
+        } catch (java.lang.NullPointerException e) {
+            System.out.println("No existe la palabra " + key);
+
+        }
+
+        // success
+        return true;
     }  // end delete()
 // -------------------------------------------------------------
     // returns node with next-highest value after delNode
@@ -201,11 +231,14 @@ class Tree {
 // -------------------------------------------------------------
 
     public void Ordenar() {
-                
-                System.out.println("inOrder:");
-                System.out.println("------------");
-                inOrder(root);
-               
+
+        if (root == null) {
+            System.out.println("------------------------------------------");
+            System.out.println("No hay palabras en el diccionario");
+            System.out.println("------------------------------------------");
+        } else {
+            inOrder(root);
+        }
     }
 // -------------------------------------------------------------
 
@@ -220,10 +253,13 @@ class Tree {
 
     private void inOrder(Node localRoot) {
         if (localRoot != null) {
+            System.out.println("---------------------------------");
             inOrder(localRoot.leftChild);
             System.out.println(localRoot.pal + " ");
             inOrder(localRoot.rightChild);
+            System.out.println("--------------------------------");
         }
+
     }
 // -------------------------------------------------------------
 
@@ -232,6 +268,7 @@ class Tree {
             postOrder(localRoot.leftChild);
             postOrder(localRoot.rightChild);
             System.out.print(localRoot.pal + " ");
+
         }
     }
 // -------------------------------------------------------------
@@ -254,7 +291,7 @@ class Tree {
             while (globalStack.isEmpty() == false) {
                 Node temp = (Node) globalStack.pop();
                 if (temp != null) {
-                   temp.displayNode();
+                    temp.displayNode();
                     localStack.push(temp.leftChild);
                     localStack.push(temp.rightChild);
 

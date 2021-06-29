@@ -5,7 +5,6 @@
  */
 package diccionario;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,9 +27,7 @@ public class Diccionario {
         try {
 
             do {
-                System.out.println("===============");
-                System.out.println("   Menu");
-                System.out.println("===============");
+                System.out.println("=========  MENU  ========= ");
                 System.out.println("1) Agregar palabra");
                 System.out.println("2) Buscar palabra ");
                 System.out.println("3) Mostrar Diccionario");
@@ -45,7 +42,7 @@ public class Diccionario {
 
                         System.out.print("Ingrese Significado: ");
                         String s = leer.next();
-                        System.out.print("Ingrese Clasificación: ");
+                        System.out.print("Ingrese Clasificación (verbo, sustantivo, etc): ");
                         String c = leer.next();
 
                         t.insert(n, c, s);
@@ -55,14 +52,13 @@ public class Diccionario {
                         String b = leer.next();
                         t.find(b);
                         break;
-                        
                     case 3:
                         t.Ordenar();
                         break;
                     case 4:
                         System.out.print("Palabra a eliminar: ");
                         String e = leer.next();
-//                    t.delete(e);
+                        t.delete(e);
                         break;
                     case 5:
                         System.out.println("Saliendo...");
@@ -72,11 +68,10 @@ public class Diccionario {
                         System.out.println("");
                         break;
                 }
-            } while (opcion != 5);
+            } while (opcion != 5 );
 
         } catch (InputMismatchException e) {
             System.out.println("Solo números");
-             
         }
 
     }
