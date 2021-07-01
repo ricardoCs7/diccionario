@@ -14,65 +14,75 @@ import java.util.Scanner;
  */
 public class Diccionario {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-
+        Diccionario d = new Diccionario();
         Tree t = new Tree();
         Scanner leer = new Scanner(System.in);
+        int opcion = 0;
 
-        int opcion;
+        Scanner sub = new Scanner(System.in);
+        do {
 
-        try {
+            try {
 
-            do {
                 System.out.println("=========  MENU  ========= ");
                 System.out.println("1) Agregar palabra");
                 System.out.println("2) Buscar palabra ");
                 System.out.println("3) Mostrar Diccionario");
                 System.out.println("4) Eliminar Palabra");
                 System.out.println("5) Salir");
+                System.out.println("6) Mostrar Arbol");
                 opcion = leer.nextInt();
 
                 switch (opcion) {
                     case 1:
                         System.out.print("Ingrese palabra: ");
-                        String n = leer.next();
+                        String n = sub.nextLine();
 
                         System.out.print("Ingrese Significado: ");
-                        String s = leer.next();
+                        String s = sub.nextLine();
+
                         System.out.print("Ingrese Clasificación (verbo, sustantivo, etc): ");
-                        String c = leer.next();
+                        String c = sub.nextLine();
 
                         t.insert(n, c, s);
+                        System.out.println("");
                         break;
                     case 2:
                         System.out.print("Ingrese búsqueda:");
-                        String b = leer.next();
+                        String b = sub.next();
                         t.find(b);
+                        System.out.println("");
                         break;
+
                     case 3:
                         t.Ordenar();
+                        System.out.println("");
                         break;
                     case 4:
                         System.out.print("Palabra a eliminar: ");
-                        String e = leer.next();
+                        String e = sub.next();
                         t.delete(e);
+                        System.out.println("");
                         break;
                     case 5:
                         System.out.println("Saliendo...");
                         break;
                     default:
-                        System.out.println("Error, eliga un opción válida");
+                        System.out.println("Error, eliga un opción entre 1-5");
                         System.out.println("");
                         break;
+                    case 6:
+                        System.out.println("mostrar arbol");
+                        t.displayTree();
                 }
-            } while (opcion != 5 );
 
-        } catch (InputMismatchException e) {
-            System.out.println("Solo números");
-        }
+            } catch (InputMismatchException e) {
+                System.out.println("Solo números, intentelo nuevamente");
+                leer.next();
+                System.out.println("");
+            }
+        } while (opcion != 5);
 
     }
 }

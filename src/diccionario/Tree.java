@@ -45,35 +45,36 @@ class Tree {
         Node current = root;               // start at root
 
         try {
-            while (!current.pal.equalsIgnoreCase(key)) // while no match,
+            while (current.pal.compareToIgnoreCase(key) != 0) // while no match,
             {
+                if (key.compareToIgnoreCase(current.pal) < 0) { // go left?
 
-                if (key.compareTo(current.pal) < 0) // go left?
-                {
-
-                    current.equals(current.leftChild);
-                } else {
-
-                    current.equals(current.rightChild);
+                    current = current.leftChild;
                 }
-                if (current == null) // if no child,
-                {
-                    return null;
+                if (key.compareToIgnoreCase(current.pal) > 0) {
+                    current = current.rightChild;
                 }
             }
-
-            System.out.println("----------------------------------");
-            System.out.println("    Se ha encontrado:");
-            System.out.println("PALABRA: " + current.pal);
-            System.out.println("CLASIFICACION: " + current.clas);
-            System.out.println("SIGNIFICADO: " + current.sign);
-            System.out.println("---------------------------------" + "\n");
-
-        } catch (java.lang.NullPointerException e) {
-            System.out.println("No se ha encontrado la palabra '" + key + "'");
+            if (key.compareToIgnoreCase(current.pal) == 0) {
+                System.out.println("PALABRA:" + current.pal);
+                System.out.println("SIGNIFICADO: " + current.sign);
+                System.out.println("CLASIFICACON: " + current.clas);
+            }
+            if (current == null) {
+                System.out.println("");
+                System.out.println("------------------------------------------------------------------------");
+                System.out.println(" no hay coincidencias");// if no child,
+                System.out.println("------------------------------------------------------------------------");
+                return null;             // didn't find it
+            }
+        } catch (NullPointerException e) {
+            System.out.println("");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("ERROR EN LA BUSQUEDA: '" + key + "' " + "no se encuentra en el diccionario");
+            System.out.println("------------------------------------------------------------------------");
         }
-        // found it
-        return current;
+
+        return current;                    // found it
     }  // end find()
 // -------------------------------------------------------------
 
@@ -94,10 +95,13 @@ class Tree {
             {
                 parent = current;
                 if (pal.equalsIgnoreCase(parent.pal)) {
-                    System.out.println("'"+ pal+"' "+ "ya existe, imposible guardar");
+                    System.out.println("");
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("ERROR AL INGRESAR: '" + pal + "' " + "ya existe, imposible guardar");
+                    System.out.println("------------------------------------------------------------------------");
                     return;
                 }
-                if (pal.compareTo(current.pal) < 0) // go left?
+                if (pal.compareToIgnoreCase(current.pal) < 0) // go left?
                 {
                     current = current.leftChild;
                     if (current == null) // if end of the line,
@@ -108,7 +112,10 @@ class Tree {
                 } // end if go left
                 else // or go right?
                 {
-                    current = current.rightChild;
+                    if (pal.compareToIgnoreCase(current.pal) > 0) {
+                        current = current.rightChild;
+                    }
+
                     if (current == null) // if end of the line
                     {                 // insert on right
                         parent.rightChild = newNode;
@@ -136,14 +143,18 @@ class Tree {
                 if (key.compareToIgnoreCase(current.pal) < 0) // go left?
                 {
                     isLeftChild = true;
-                    current.equals(current.leftChild);
-                } else // or go right?
-                {
+                    current = current.leftChild;
+                }
+                if (key.compareToIgnoreCase(current.pal) >0) { // or go right?
                     isLeftChild = false;
-                    current.equals(current.rightChild);
+                    current = current.rightChild;
+
                 }
                 if (current == null) // end of the line,
                 {
+                   System.out.println("------------------------------------------------------------------------");
+                    System.out.println("No existe la palabra '"+key+"' en el diccionario");
+                    System.out.println("------------------------------------------------------------------------");
                     return false;                // didn't find it
                 }
             }  // end while
@@ -197,19 +208,29 @@ class Tree {
                 successor.leftChild = current.leftChild;
             }  // end else two children
             // (successor cannot have a left child)
+            System.out.println("");
+            System.out.println("------------------------------------------------------------------------");
             System.out.println("Se ha eliminado la palabra " + key);
+            System.out.println("------------------------------------------------------------------------");
         } catch (java.lang.NullPointerException e) {
-            System.out.println("No existe la palabra " + key);
+            System.out.println("");
+            System.out.println("------------------------------------------------------------------------");
+            
+            System.out.println("ERROR AL ELIMINAR: No existe la palabra '"+key+"' en el diccionario");
+            System.out.println("------------------------------------------------------------------------");
 
         }
 
         // success
         return true;
     }  // end delete()
-// -------------------------------------------------------------
+
+    // end delete()
     // returns node with next-highest value after delNode
     // goes to right child, then right child's left descendents
-
+    
+    
+ ////-------------------------------------------------------------------------   
     private Node getSuccessor(Node delNode) {
         Node successorParent = delNode;
         Node successor = delNode;
