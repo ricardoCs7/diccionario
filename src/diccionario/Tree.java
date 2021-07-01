@@ -55,10 +55,13 @@ class Tree {
                     current = current.rightChild;
                 }
             }
+            System.out.println("");
+            System.out.println("------------------------------------------------------------------------");
             if (key.compareToIgnoreCase(current.pal) == 0) {
                 System.out.println("PALABRA:" + current.pal);
                 System.out.println("SIGNIFICADO: " + current.sign);
                 System.out.println("CLASIFICACON: " + current.clas);
+                System.out.println("------------------------------------------------------------------------");
             }
             if (current == null) {
                 System.out.println("");
@@ -97,7 +100,7 @@ class Tree {
                 if (pal.equalsIgnoreCase(parent.pal)) {
                     System.out.println("");
                     System.out.println("------------------------------------------------------------------------");
-                    System.out.println("ERROR AL INGRESAR: '" + pal + "' " + "ya existe, imposible guardar");
+                    System.out.println("ERROR AL INGREAR: '" + pal + "' " + "ya existe, imposible guardar");
                     System.out.println("------------------------------------------------------------------------");
                     return;
                 }
@@ -126,6 +129,10 @@ class Tree {
                 // end else go right
             }  // end while
         }  // end else not root
+        System.out.println("");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Se ha ingresado ' " + pal + "' exitosamente en el diccionario");
+        System.out.println("------------------------------------------------------------------------");
     }  // end insert()
 // -------------------------------------------------------------
 
@@ -145,15 +152,16 @@ class Tree {
                     isLeftChild = true;
                     current = current.leftChild;
                 }
-                if (key.compareToIgnoreCase(current.pal) >0) { // or go right?
+                if (key.compareToIgnoreCase(current.pal) > 0) { // or go right?
                     isLeftChild = false;
                     current = current.rightChild;
 
                 }
                 if (current == null) // end of the line,
                 {
-                   System.out.println("------------------------------------------------------------------------");
-                    System.out.println("No existe la palabra '"+key+"' en el diccionario");
+                    System.out.println("");
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("ERROR AL ELIMINAR: No existe la palabra '" + key + "' en el diccionario");
                     System.out.println("------------------------------------------------------------------------");
                     return false;                // didn't find it
                 }
@@ -210,13 +218,12 @@ class Tree {
             // (successor cannot have a left child)
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
-            System.out.println("Se ha eliminado la palabra " + key);
+            System.out.println("Se ha eliminado la palabra '" + key + "' exitosamente");
             System.out.println("------------------------------------------------------------------------");
         } catch (java.lang.NullPointerException e) {
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
-            
-            System.out.println("ERROR AL ELIMINAR: No existe la palabra '"+key+"' en el diccionario");
+            System.out.println("ERROR AL ELIMINAR: No existe la palabra '" + key + "' en el diccionario");
             System.out.println("------------------------------------------------------------------------");
 
         }
@@ -228,9 +235,7 @@ class Tree {
     // end delete()
     // returns node with next-highest value after delNode
     // goes to right child, then right child's left descendents
-    
-    
- ////-------------------------------------------------------------------------   
+    ////-------------------------------------------------------------------------   
     private Node getSuccessor(Node delNode) {
         Node successorParent = delNode;
         Node successor = delNode;
@@ -254,10 +259,15 @@ class Tree {
     public void Ordenar() {
 
         if (root == null) {
+            System.out.println("");
             System.out.println("------------------------------------------");
             System.out.println("No hay palabras en el diccionario");
             System.out.println("------------------------------------------");
         } else {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("======   DICCIONARIO   =====");
+
             inOrder(root);
         }
     }
@@ -274,11 +284,12 @@ class Tree {
 
     private void inOrder(Node localRoot) {
         if (localRoot != null) {
-            System.out.println("---------------------------------");
+
             inOrder(localRoot.leftChild);
             System.out.println(localRoot.pal + " ");
+            System.out.println("-------------------------");
             inOrder(localRoot.rightChild);
-            System.out.println("--------------------------------");
+
         }
 
     }

@@ -36,6 +36,7 @@ public class Diccionario {
 
                 switch (opcion) {
                     case 1:
+                        System.out.println("");
                         System.out.print("Ingrese palabra: ");
                         String n = sub.nextLine();
 
@@ -50,7 +51,7 @@ public class Diccionario {
                         break;
                     case 2:
                         System.out.print("Ingrese búsqueda:");
-                        String b = sub.next();
+                        String b = sub.nextLine();
                         t.find(b);
                         System.out.println("");
                         break;
@@ -61,7 +62,7 @@ public class Diccionario {
                         break;
                     case 4:
                         System.out.print("Palabra a eliminar: ");
-                        String e = sub.next();
+                        String e = sub.nextLine();
                         t.delete(e);
                         System.out.println("");
                         break;
