@@ -1,4 +1,4 @@
-//RICARDO CARRASCO S.
+// @author Ricardo
 // repositorio https://github.com/ricardoCs7/diccionario.git 
 package diccionario;
 
@@ -6,9 +6,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
+ * RICARDO CARRASCO S.
  *
- * @author Ricardo
+ *
  */
+
+
 public class Diccionario {
 
     public static void main(String[] args) {
