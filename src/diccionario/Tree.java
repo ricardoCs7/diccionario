@@ -1,5 +1,6 @@
 //RICARDO CARRASCO S.
 // repositorio https://github.com/ricardoCs7/diccionario.git 
+
 package diccionario;
 
 // tree.java
@@ -47,9 +48,9 @@ class Tree {
         Node current = root;               // start at root
 
         try {
-            while (current.pal.compareToIgnoreCase(key) != 0) // while no match,
+            while (current.pal.compareToIgnoreCase(key) != 0) // while no match,   
             {
-                if (key.compareToIgnoreCase(current.pal) < 0) { // go left?
+                if (key.compareToIgnoreCase(current.pal) < 0) { // go left?    
 
                     current = current.leftChild;
                 }
@@ -59,7 +60,7 @@ class Tree {
             }
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
-            if (key.compareToIgnoreCase(current.pal) == 0) {
+            if (key.compareToIgnoreCase(current.pal) == 0) {  //SI LA PALABRA BUSCADA COINCIDE Y EXISTE EN EL DICCIONARIO, MOSTRARÁ POR CONSOLA LO SGTE: 
                 System.out.println("PALABRA:" + current.pal);
                 System.out.println("SIGNIFICADO: " + current.sign);
                 System.out.println("CLASIFICACON: " + current.clas);
@@ -72,7 +73,7 @@ class Tree {
                 System.out.println("------------------------------------------------------------------------");
                 return null;             // didn't find it
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException e) { //EN CASO DE QUE NO EXISTA LA PALABRA BUSCADA, SE ENCAPSULA EL ERROR, Y VUELVE AL CICLO DEL DO-WHY
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
             System.out.println("ERROR EN LA BUSQUEDA: '" + key + "' " + "no se encuentra en el diccionario");
@@ -99,15 +100,15 @@ class Tree {
             while (true) // (exits internally)
             {
                 parent = current;
-                if (pal.equalsIgnoreCase(parent.pal)) {
+                if (pal.equalsIgnoreCase(parent.pal)) { //SI LA PALABRA YA EXISTE EN EL DICCIONARIO, NO SE GUARDARÁ.
                     System.out.println("");
                     System.out.println("------------------------------------------------------------------------");
                     System.out.println("ERROR AL INGREAR: '" + pal + "' " + "ya existe, imposible guardar");
                     System.out.println("------------------------------------------------------------------------");
                     return;
                 }
-                if (pal.compareToIgnoreCase(current.pal) < 0) // go left?
-                {
+                if (pal.compareToIgnoreCase(current.pal) < 0) // go left? SI LA PALABRA INGRESADA ES "MENOR" ALFABETICAMENTE, VA COMO HIJO IZQUIERDO
+                {                                               //LA COMPARACION IGNORA MAYUSCULAS
                     current = current.leftChild;
                     if (current == null) // if end of the line,
                     {                 // insert on left
@@ -117,7 +118,7 @@ class Tree {
                 } // end if go left
                 else // or go right?
                 {
-                    if (pal.compareToIgnoreCase(current.pal) > 0) {
+                    if (pal.compareToIgnoreCase(current.pal) > 0) {  //SI LA PALABRA INGRESADA ES "MAYOR" ALFABETICAMENTE, VA COMO HIJO DERECHO
                         current = current.rightChild;
                     }
 
@@ -146,16 +147,16 @@ class Tree {
 
         try {
 
-            while (!current.pal.equalsIgnoreCase(key)) // search for node
+            while (!current.pal.equalsIgnoreCase(key)) // search for node 
             {
                 parent = current;
-                if (key.compareToIgnoreCase(current.pal) < 0) // go left?
-                {
+                if (key.compareToIgnoreCase(current.pal) < 0) // go left? ---- SE COMPARA LA PALABRA A ELIMINAR PARA VER SI VA COMO HIJO IZQUIERDO
+                {                                                               //SI LA PALABRA INGRESADA ES MENOR ALFABETICAMENTE A LA EXISTENTE
                     isLeftChild = true;
                     current = current.leftChild;
                 }
-                if (key.compareToIgnoreCase(current.pal) > 0) { // or go right?
-                    isLeftChild = false;
+                if (key.compareToIgnoreCase(current.pal) > 0) { // or go right? --- SE COMPARA LA PALABRA A ELIMINAR PARA VER SI VA COMO HIJO IZQUIERDO
+                    isLeftChild = false;                                            //SI LA PALABRA INGRESADA ES MENOR ALFABETICAMENTE A LA EXISTENTE
                     current = current.rightChild;
 
                 }
@@ -222,7 +223,7 @@ class Tree {
             System.out.println("------------------------------------------------------------------------");
             System.out.println("Se ha eliminado la palabra '" + key + "' exitosamente");
             System.out.println("------------------------------------------------------------------------");
-        } catch (java.lang.NullPointerException e) {
+        } catch (java.lang.NullPointerException e) {  //ENCAPSULA EL ERRO EN CASO DE QUE NO EXISTA LA PALABRA A ELIMINAR
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
             System.out.println("ERROR AL ELIMINAR: No existe la palabra '" + key + "' en el diccionario");
@@ -263,14 +264,14 @@ class Tree {
         if (root == null) {
             System.out.println("");
             System.out.println("------------------------------------------");
-            System.out.println("No hay palabras en el diccionario");
+            System.out.println("No hay palabras en el diccionario");            //SI SE DESESA ORDENAR EL DICCIONARIO, SIN HABER PALABRAS, MUESTRA ESTE MENSAJE
             System.out.println("------------------------------------------");
         } else {
             System.out.println("");
             System.out.println("");
             System.out.println("======   DICCIONARIO   =====");
 
-            inOrder(root);
+            inOrder(root); //SI HAY PALABRAS INGRESADAS, SE MOSTRARÁN IN ORDER, ORDENADAS ALFABETICAMENTE DE A-Z 
         }
     }
 // -------------------------------------------------------------
@@ -325,7 +326,7 @@ class Tree {
             while (globalStack.isEmpty() == false) {
                 Node temp = (Node) globalStack.pop();
                 if (temp != null) {
-                    temp.displayNode();
+                    temp.displayNode();                     ////// FUE MODIFICADO, PARA QUE AL MOSTRAR EL ARBOL, MUESTRE EN FORMATO {PALABRA, SIGNIFICADO, CLASIFICACION}
                     localStack.push(temp.leftChild);
                     localStack.push(temp.rightChild);
 
