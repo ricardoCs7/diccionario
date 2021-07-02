@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Diccionario {
 
     public static void main(String[] args) {
-        Diccionario d = new Diccionario();
+
         Tree t = new Tree();
         Scanner leer = new Scanner(System.in); //SCANNER PARA LA OPCION MENU
         int opcion = 0; //SE INICIALIZA EL SCANNER
@@ -67,6 +67,7 @@ public class Diccionario {
                         System.out.println("");
                         break;
                     case 5:
+                        System.out.println("");
                         System.out.println("Saliendo...");
                         break;
                     default:
@@ -74,8 +75,9 @@ public class Diccionario {
                         System.out.println("");
                         break;
                     case 6:
-                        System.out.println("ARBOL:");
+                        System.out.println("   ARBOL:");
                         t.displayTree(); //MUESTRA EL ARBOL
+                        System.out.println("");
                 }
 
             } catch (InputMismatchException e) {

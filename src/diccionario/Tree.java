@@ -1,6 +1,5 @@
 //RICARDO CARRASCO S.
 // repositorio https://github.com/ricardoCs7/diccionario.git 
-
 package diccionario;
 
 // tree.java
@@ -22,9 +21,9 @@ class Node {
     {
         System.out.print('{');
         System.out.print(pal);
-        System.out.print(":, ");
+        System.out.print(": ");
         System.out.print(clas);
-        System.out.print(",");
+        System.out.print(", ");
         System.out.print(sign);
         System.out.print("} ");
     }
@@ -61,7 +60,7 @@ class Tree {
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
             if (key.compareToIgnoreCase(current.pal) == 0) {  //SI LA PALABRA BUSCADA COINCIDE Y EXISTE EN EL DICCIONARIO, MOSTRARÁ POR CONSOLA LO SGTE: 
-                System.out.println("PALABRA:" + current.pal);
+                System.out.println("PALABRA: " + current.pal);
                 System.out.println("SIGNIFICADO: " + current.sign);
                 System.out.println("CLASIFICACON: " + current.clas);
                 System.out.println("------------------------------------------------------------------------");
@@ -134,7 +133,7 @@ class Tree {
         }  // end else not root
         System.out.println("");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("Se ha ingresado ' " + pal + "' exitosamente en el diccionario");
+        System.out.println("Se ha ingresado '" + pal + "' exitosamente en el diccionario");
         System.out.println("------------------------------------------------------------------------");
     }  // end insert()
 // -------------------------------------------------------------
