@@ -16,7 +16,7 @@ public class Diccionario {
 
         Tree t = new Tree();
         Scanner leer = new Scanner(System.in); //SCANNER PARA LA OPCION MENU
-        int opcion = 0; //SE INICIALIZA EL SCANNER
+        int opcion = 0; //SE INICIALIZA EL PARAMETRO OPCION PARA EL MENU PRINCIPAL
 
         Scanner sub = new Scanner(System.in); /// SCANNER SUB YA QUE CON UN SCANNER PARA TODO EL MENU, HACIA CONFLICTO [EL NEXTLINE() NO TOMABA NINGUNA PALABRA]
                                               ///FUE NECESARIO EN ESTE CASO CREAR DOS SCANNERS.
