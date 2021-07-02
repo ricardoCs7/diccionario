@@ -46,13 +46,13 @@ public class Diccionario {
                         System.out.print("Ingrese Clasificación (verbo, sustantivo, etc): ");
                         String c = sub.nextLine();
 
-                        t.insert(n, c, s);
+                        t.insert(n, c, s);   /// GUARDA EL NODO "PALABRA" CON SU NOMBRE-CLASIFICACION-SIGNFICADO
                         System.out.println("");
                         break;
                     case 2:
                         System.out.print("Ingrese búsqueda:");
                         String b = sub.nextLine();
-                        t.find(b);
+                        t.find(b);  //BUSCA EL NODO, CON LA PALABRA INGRESADA POR TECLADO
                         System.out.println("");
                         break;
 
@@ -63,7 +63,7 @@ public class Diccionario {
                     case 4:
                         System.out.print("Palabra a eliminar: ");
                         String e = sub.nextLine();
-                        t.delete(e);
+                        t.delete(e); //SE ELIMINA EL NODO, CON LA PALABRA INGRESADA
                         System.out.println("");
                         break;
                     case 5:
@@ -76,7 +76,7 @@ public class Diccionario {
                         break;
                     case 6:
                         System.out.println("   ARBOL:");
-                        t.displayTree(); //MUESTRA EL ARBOL
+                        t.displayTree(); //MUESTRA EL ARBOL CON LOS NODOS E HIJOS INGRESADOS EN EL DICCIONARIO
                         System.out.println("");
                 }
 
