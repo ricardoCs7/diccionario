@@ -1,6 +1,5 @@
 //RICARDO CARRASCO S.
 // repositorio https://github.com/ricardoCs7/diccionario.git 
-
 package diccionario;
 
 import java.util.InputMismatchException;
@@ -19,8 +18,8 @@ public class Diccionario {
         int opcion = 0; //SE INICIALIZA EL PARAMETRO OPCION PARA EL MENU PRINCIPAL
 
         Scanner sub = new Scanner(System.in); /// SCANNER SUB YA QUE CON UN SCANNER PARA TODO EL MENU, HACIA CONFLICTO [EL NEXTLINE() NO TOMABA NINGUNA PALABRA]
-                                              ///FUE NECESARIO EN ESTE CASO CREAR DOS SCANNERS.
-                                    
+        ///FUE NECESARIO EN ESTE CASO CREAR DOS SCANNERS.
+
         do {  //CICLO PARA QUE AL ENCAPSULAR EL ERROR DEL TRY, VUEVLA A EJECTUAR EL MENU
 
             try { //ENCAPSULA EL ERROR DE INGRESAR UNA OPCION INCORRECTA, ES DECIR, LETRAS EN VEZ DE UN NUMERO DE 1-6
@@ -30,8 +29,8 @@ public class Diccionario {
                 System.out.println("2) Buscar palabra ");
                 System.out.println("3) Mostrar Diccionario");
                 System.out.println("4) Eliminar Palabra");
-                System.out.println("5) Salir");
-                System.out.println("6) Mostrar Árbol");
+                System.out.println("5) Mostrar Árbol");
+                System.out.println("6) Salir");
                 opcion = leer.nextInt();
 
                 switch (opcion) {
@@ -68,24 +67,29 @@ public class Diccionario {
                         break;
                     case 5:
                         System.out.println("");
-                        System.out.println("Saliendo...");
-                        break;
-                    default:
-                        System.out.println("Error, eliga un opción entre 1-5");
-                        System.out.println("");
-                        break;
-                    case 6:
                         System.out.println("   ARBOL:");
                         t.displayTree(); //MUESTRA EL ARBOL CON LOS NODOS E HIJOS INGRESADOS EN EL DICCIONARIO
                         System.out.println("");
+                        break;
+
+                    case 6:
+                        System.out.println("");
+                        System.out.println("Saliendo...");
+                        break;
+                    default:
+                        System.out.println("");
+                        System.out.println("Error, eliga un opción entre 1-6");
+                        System.out.println("");
+                        break;
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Solo números, intentelo nuevamente"); //ERROR EN CASO DE QUE SE INGRESE UN DATO INCORRECTO EN EL MENU
+                System.out.println("");
+                System.out.println("ERROR: Ingrese solo números, intentelo nuevamente."); //ERROR EN CASO DE QUE SE INGRESE UN DATO INCORRECTO EN EL MENU
                 leer.next();
                 System.out.println("");
             }
-        } while (opcion != 5); 
+        } while (opcion != 6); //Se cierra la aplicacion al momento de presionar 6 = opcion salir
 
     }
 }
