@@ -1,4 +1,5 @@
-// RICARDO CARRASCO S:
+//RICARDO CARRASCO S.
+// repositorio https://github.com/ricardoCs7/diccionario.git 
 package diccionario;
 
 import java.util.InputMismatchException;
